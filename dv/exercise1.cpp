@@ -4,6 +4,8 @@
 
 int main() {
   VExercise1 model;
+
+  bool test_pass;
   model.a =0;
   model.b =0;
   model.op =0;
@@ -15,19 +17,19 @@ int main() {
 
       model.op =0;
       model.eval();
-      assert(model.out == uint8_t(model.a ^ model.b));
+      if(model.out != uint8_t(model.a ^ model.b)) test_pass = false;
 
       model.op =1;
       model.eval();
-      //assert(model.out == uint8_t(model.a << model.b));
+      if(model.out != (model.a << model.b))test_pass = false ;
 
       model.op =2;
       model.eval();
-      assert(model.out == uint8_t(model.a % model.b));
+      if(model.out != uint8_t(model.a % model.b)) test_pass = false;
 
       model.op =3;
       model.eval();
-      assert(model.out == uint8_t(~(model.a & model.b)));
+      if(model.out != uint8_t(~(model.a & model.b))) test_pass = false;
     }
   }
 }
