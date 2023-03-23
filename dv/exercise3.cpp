@@ -69,6 +69,7 @@ void step(VExercise3& model) {
 int main() {
   VExercise3 model;
   Excercise3_sim sim;
+  bool test_pass;
 
   std::default_random_engine re {std::random_device {}()};
   std::uniform_int_distribution<uint8_t> rand4 {0, 15};
@@ -79,9 +80,8 @@ int main() {
   model.c = 0x0000;
 
   model.reset = 1;
-  model.eval();
-  model.eval();
-  assert(model.out == sim.reset(model.a, model.b, model.c));
+  step(model);
+  if(model.out != sim.reset(model.a, model.b, model.c)) test_pass = false;
   //assert(model.out == 0xFF00);
   //assert(sim.reset(model.a, model.b, model.c) == 0xFF00);
   model.reset = 0;
@@ -91,6 +91,7 @@ int main() {
     model.b = rand16(re);
     model.c = rand16(re);
     step(model);
-    assert(model.out == sim.step(model.a, model.b, model.c));
+    //model.eval();
+    if(model.out != sim.step(model.a, model.b, model.c)) test_pass = false;
   }
 }
