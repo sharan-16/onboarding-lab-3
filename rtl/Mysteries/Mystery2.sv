@@ -1,4 +1,4 @@
-/**
+  /**
   @brief Spooky Mystery Module
 
   @input clk    clock
